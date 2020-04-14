@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import Error from "./Error";
 
 const Form = () => {
+  const [word, setWord] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (word.trim() === "") {
+      setError(true);
+      return;
+    }
+    setError(false);
+  };
+
   return (
-    <form action="">
+    <form action="" onSubmit={handleSubmit}>
       <div className="row">
         <div className="form-group col-md-8">
           <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Search an image"
+            onChange={(e) => setWord(e.target.value)}
           />
         </div>
         <div className="form-group col-md-4">
@@ -19,6 +34,7 @@ const Form = () => {
           />
         </div>
       </div>
+      {error ? <Error message="Search field is mandatory." /> : null}
     </form>
   );
 };
