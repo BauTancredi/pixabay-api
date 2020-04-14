@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import Error from "./Error";
 
 const Form = ({ setSearch }) => {
@@ -38,6 +40,10 @@ const Form = ({ setSearch }) => {
       {error ? <Error message="Search field is mandatory." /> : null}
     </form>
   );
+};
+
+Form.propTypes = {
+  setSearch: PropTypes.func.isRequired,
 };
 
 export default Form;
